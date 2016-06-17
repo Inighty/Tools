@@ -18,3 +18,7 @@ c.hosts
 d.weibo for weixin public
 
 获取指定人最新微博，通过微信公众号推送
+
+2.Menu
+
+上班点菜程序...
