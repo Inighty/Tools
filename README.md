@@ -1,5 +1,5 @@
 # Tools
-Some small tools for myself
+Some small tools for myself based on python 2.7
 
 1.Python脚本
 
