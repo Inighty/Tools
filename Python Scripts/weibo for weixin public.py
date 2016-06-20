@@ -1,5 +1,5 @@
 #-*-coding:utf8-*-
-#老婆不用微博，但是想知道老胡和JJ的最新微博。。
+#不用微博，但是想知道老胡和JJ的最新微博。。
 import cookielib
 import json
 import re
