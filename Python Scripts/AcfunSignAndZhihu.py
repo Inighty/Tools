@@ -33,7 +33,7 @@ def loginAcfun():
     req.add_header('User-Agent','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36')
     ret = urllib2.urlopen(req)
     retread = ret.read()
-    print gzipData(retread)
+    print(gzipData(retread))
     sign()
 
 def sign():
@@ -122,7 +122,7 @@ def login(str,tofakeid,token,quickReplayId):
     #不加cookie也可发送
     #req2.add_header('Cookie',cookie2)
     ret2=urllib2.urlopen(req)
-    print 'x',ret2.read()
+    print('x',ret2.read())
 
 def md5(str):
     import hashlib
@@ -167,6 +167,7 @@ def xiache():
                     title = ""
             allAnswer = "答："+ answer +"\n\n"
             end+=allAnswer
+            answer=""
     else:
         for i in range(0,count,1):
             #问题
