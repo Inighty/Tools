@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{70FAFA45-6DF0-4C1E-AA74-FBD47F117DF0}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>zuiyou</RootNamespace>
+    <AssemblyName>zuiyou</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Better.Common.KeyIDGenerator">
+      <HintPath>..\DLL\Better.Common.KeyIDGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="Better.Infrastructures.DBUtility">
+      <HintPath>..\DLL\Better.Infrastructures.DBUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="Better.Infrastructures.Log">
+      <HintPath>..\DLL\Better.Infrastructures.Log.dll</HintPath>
+    </Reference>
+    <Reference Include="Better.Infrastructures.WCF">
+      <HintPath>..\DLL\Better.Infrastructures.WCF.dll</HintPath>
+    </Reference>
+    <Reference Include="Better.SecurityUtility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Better.SecurityUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="Better517na.Core.AsyncInfrastructure.CommonCallHelper">
+      <HintPath>..\DLL\Better517na.Core.AsyncInfrastructure.CommonCallHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Better517na.Core.AsyncInfrastructure.HeartBeatService">
+      <HintPath>..\DLL\Better517na.Core.AsyncInfrastructure.HeartBeatService.dll</HintPath>
+    </Reference>
+    <Reference Include="Better517na.Core.DB.DBRouteHelper">
+      <HintPath>..\DLL\Better517na.Core.DB.DBRouteHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Better517na.Core.ServiceRouteControl.Contract">
+      <HintPath>..\DLL\Better517na.Core.ServiceRouteControl.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="Better517na.Core.ServiceRouteControl.Helper">
+      <HintPath>..\DLL\Better517na.Core.ServiceRouteControl.Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="Better517Na.DBAccessLayer.ProcessBase">
+      <HintPath>..\DLL\Better517Na.DBAccessLayer.ProcessBase.dll</HintPath>
+    </Reference>
+    <Reference Include="Better517Na.Http.Helper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Better517Na.Http.Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="Better517Na.Json">
+      <HintPath>..\DLL\Better517Na.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Better517Na.LogCollection.LocalConfig">
+      <HintPath>..\DLL\Better517Na.LogCollection.LocalConfig.dll</HintPath>
+    </Reference>
+    <Reference Include="Better517Na.Proxy.Helper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Better517Na.Proxy.Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="Better517Na.SendEmailService.Contract">
+      <HintPath>..\DLL\Better517Na.SendEmailService.Contract.dll</HintPath>
+    </Reference>
+    <Reference Include="Better517Na.SendEmailService.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Better517Na.SendEmailService.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Better517Na.SendEmailService.Service">
+      <HintPath>..\DLL\Better517Na.SendEmailService.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="Better517Na.ThriftX.Common">
+      <HintPath>..\DLL\Better517Na.ThriftX.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Exchange.WebServices, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Microsoft.Exchange.WebServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\DLL\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\DLL\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception">
+      <HintPath>..\DLL\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="MonitorResourceReport.Model">
+      <HintPath>..\DLL\MonitorResourceReport.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=5.2.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Protobuf">
+      <HintPath>..\DLL\Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Thrift">
+      <HintPath>..\DLL\Thrift.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="DBRouteParam.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="KeyIDGenerator.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Proxy.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\zuiyou.Business\zuiyou.Business.csproj">
+      <Project>{45ba16ee-2c51-4614-8e26-d64ddef4cd02}</Project>
+      <Name>zuiyou.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zuiyou.Common\zuiyou.Common.csproj">
+      <Project>{5bca406f-ea2e-4b4a-9607-93412114ca69}</Project>
+      <Name>zuiyou.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zuiyou.DAL\zuiyou.DAL.csproj">
+      <Project>{64678b79-6e0b-4b60-8cda-4f07def0a94b}</Project>
+      <Name>zuiyou.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zuiyou.Model\zuiyou.Model.csproj">
+      <Project>{48ef4a4a-e2f0-4c90-839b-a2faed0d36fe}</Project>
+      <Name>zuiyou.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
