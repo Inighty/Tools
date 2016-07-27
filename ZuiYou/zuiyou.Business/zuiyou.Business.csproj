@@ -7,8 +7,8 @@
     <ProjectGuid>{45BA16EE-2C51-4614-8E26-D64DDEF4CD02}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>zuiyou.Business</RootNamespace>
-    <AssemblyName>zuiyou.Business</AssemblyName>
+    <RootNamespace>Zuiyou.Business</RootNamespace>
+    <AssemblyName>Zuiyou.Business</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,68 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Better.Common.KeyIDGenerator">
-      <HintPath>..\DLL\Better.Common.KeyIDGenerator.dll</HintPath>
-    </Reference>
-    <Reference Include="Better.Infrastructures.DBUtility">
-      <HintPath>..\DLL\Better.Infrastructures.DBUtility.dll</HintPath>
-    </Reference>
-    <Reference Include="Better.Infrastructures.Log">
-      <HintPath>..\DLL\Better.Infrastructures.Log.dll</HintPath>
-    </Reference>
-    <Reference Include="Better.Infrastructures.WCF">
-      <HintPath>..\DLL\Better.Infrastructures.WCF.dll</HintPath>
-    </Reference>
-    <Reference Include="Better.SecurityUtility">
-      <HintPath>..\DLL\Better.SecurityUtility.dll</HintPath>
-    </Reference>
-    <Reference Include="Better517na.Core.AsyncInfrastructure.CommonCallHelper">
-      <HintPath>..\DLL\Better517na.Core.AsyncInfrastructure.CommonCallHelper.dll</HintPath>
-    </Reference>
-    <Reference Include="Better517na.Core.AsyncInfrastructure.HeartBeatService">
-      <HintPath>..\DLL\Better517na.Core.AsyncInfrastructure.HeartBeatService.dll</HintPath>
-    </Reference>
-    <Reference Include="Better517na.Core.DB.DBRouteHelper">
-      <HintPath>..\DLL\Better517na.Core.DB.DBRouteHelper.dll</HintPath>
-    </Reference>
-    <Reference Include="Better517na.Core.ServiceRouteControl.Contract">
-      <HintPath>..\DLL\Better517na.Core.ServiceRouteControl.Contract.dll</HintPath>
-    </Reference>
-    <Reference Include="Better517na.Core.ServiceRouteControl.Helper">
-      <HintPath>..\DLL\Better517na.Core.ServiceRouteControl.Helper.dll</HintPath>
-    </Reference>
-    <Reference Include="Better517Na.DBAccessLayer.ProcessBase">
-      <HintPath>..\DLL\Better517Na.DBAccessLayer.ProcessBase.dll</HintPath>
-    </Reference>
     <Reference Include="Better517Na.Http.Helper">
       <HintPath>..\DLL\Better517Na.Http.Helper.dll</HintPath>
     </Reference>
     <Reference Include="Better517Na.Json">
       <HintPath>..\DLL\Better517Na.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Better517Na.LogCollection.LocalConfig">
-      <HintPath>..\DLL\Better517Na.LogCollection.LocalConfig.dll</HintPath>
-    </Reference>
     <Reference Include="Better517Na.Proxy.Helper">
       <HintPath>..\DLL\Better517Na.Proxy.Helper.dll</HintPath>
-    </Reference>
-    <Reference Include="Better517Na.SendEmailService.Contract">
-      <HintPath>..\DLL\Better517Na.SendEmailService.Contract.dll</HintPath>
-    </Reference>
-    <Reference Include="Better517Na.SendEmailService.Model">
-      <HintPath>..\DLL\Better517Na.SendEmailService.Model.dll</HintPath>
-    </Reference>
-    <Reference Include="Better517Na.SendEmailService.Service">
-      <HintPath>..\DLL\Better517Na.SendEmailService.Service.dll</HintPath>
-    </Reference>
-    <Reference Include="Better517Na.ThriftX.Common">
-      <HintPath>..\DLL\Better517Na.ThriftX.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Exchange.WebServices">
-      <HintPath>..\DLL\Microsoft.Exchange.WebServices.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\DLL\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity">
       <HintPath>..\DLL\Microsoft.Practices.Unity.dll</HintPath>
@@ -105,9 +51,6 @@
     <Reference Include="MySql.Data">
       <HintPath>..\DLL\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Protobuf">
-      <HintPath>..\DLL\Protobuf.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -115,26 +58,23 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Thrift">
-      <HintPath>..\DLL\Thrift.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RequestZuiyou.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\zuiyou.Common\zuiyou.Common.csproj">
+    <ProjectReference Include="..\zuiyou.Common\Zuiyou.Common.csproj">
       <Project>{5bca406f-ea2e-4b4a-9607-93412114ca69}</Project>
-      <Name>zuiyou.Common</Name>
+      <Name>Zuiyou.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\zuiyou.DAL\zuiyou.DAL.csproj">
+    <ProjectReference Include="..\zuiyou.DAL\Zuiyou.DAL.csproj">
       <Project>{64678b79-6e0b-4b60-8cda-4f07def0a94b}</Project>
-      <Name>zuiyou.DAL</Name>
+      <Name>Zuiyou.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\zuiyou.Model\zuiyou.Model.csproj">
+    <ProjectReference Include="..\zuiyou.Model\Zuiyou.Model.csproj">
       <Project>{48ef4a4a-e2f0-4c90-839b-a2faed0d36fe}</Project>
-      <Name>zuiyou.Model</Name>
+      <Name>Zuiyou.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

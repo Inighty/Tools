@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using zuiyou.Business;
-using zuiyou.Common;
-using zuiyou.DAL;
-using zuiyou.Model;
+using Zuiyou.Business;
+using Zuiyou.Common;
+using Zuiyou.DAL;
+using Zuiyou.Model;
 
-namespace zuiyou
+namespace Zuiyou
 {
     class Program
     {

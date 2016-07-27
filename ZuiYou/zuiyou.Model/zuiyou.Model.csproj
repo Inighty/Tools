@@ -7,8 +7,8 @@
     <ProjectGuid>{48EF4A4A-E2F0-4C90-839B-A2FAED0D36FE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>zuiyou.Model</RootNamespace>
-    <AssemblyName>zuiyou.Model</AssemblyName>
+    <RootNamespace>Zuiyou.Model</RootNamespace>
+    <AssemblyName>Zuiyou.Model</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

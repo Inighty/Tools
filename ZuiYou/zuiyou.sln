@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zuiyou", "zuiyou\zuiyou.csproj", "{70FAFA45-6DF0-4C1E-AA74-FBD47F117DF0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zuiyou", "Zuiyou\Zuiyou.csproj", "{70FAFA45-6DF0-4C1E-AA74-FBD47F117DF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zuiyou.Business", "zuiyou.Business\zuiyou.Business.csproj", "{45BA16EE-2C51-4614-8E26-D64DDEF4CD02}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zuiyou.Business", "Zuiyou.Business\Zuiyou.Business.csproj", "{45BA16EE-2C51-4614-8E26-D64DDEF4CD02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zuiyou.Model", "zuiyou.Model\zuiyou.Model.csproj", "{48EF4A4A-E2F0-4C90-839B-A2FAED0D36FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zuiyou.Model", "Zuiyou.Model\Zuiyou.Model.csproj", "{48EF4A4A-E2F0-4C90-839B-A2FAED0D36FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zuiyou.DAL", "zuiyou.DAL\zuiyou.DAL.csproj", "{64678B79-6E0B-4B60-8CDA-4F07DEF0A94B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zuiyou.DAL", "Zuiyou.DAL\Zuiyou.DAL.csproj", "{64678B79-6E0B-4B60-8CDA-4F07DEF0A94B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zuiyou.Common", "zuiyou.Common\zuiyou.Common.csproj", "{5BCA406F-EA2E-4B4A-9607-93412114CA69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zuiyou.Common", "Zuiyou.Common\Zuiyou.Common.csproj", "{5BCA406F-EA2E-4B4A-9607-93412114CA69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
