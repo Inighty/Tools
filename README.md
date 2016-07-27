@@ -5,7 +5,7 @@ Some small tools for myself based on python 2.7
 
 a.AcfunSignAndZhihu
 
-A站签到及通过网页rss获取每日知乎日报瞎扯内容使用微信公众号推送给自己，可以使用windows任务计划程序每天定时执行一次对应bat脚本
+A站签到及通过网页rss获取每日知乎日报瞎扯内容使用微信公众号推送给自己，可以使用windows任务计划程序每天定时执行一次对应bat脚本(由于微信公众号平台现在必须扫码登录，脚本现已失效，以后看能不能改改吧)
 
 b.freeSS
 
