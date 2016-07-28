@@ -354,9 +354,9 @@ namespace Zuiyou.Business
             for (int i = 0; i < threadNum; i++)
             {
                 int yu = (endpoint - startpoint) % threadNum;
-                int shang = (endpoint - startpoint) / threadNum;
-                int start = startpoint + ((endpoint - startpoint) / threadNum * i);
-                int end = yu != 0 && i == threadNum - 1 ? (shang * (i + 1)) + yu : shang * (i + 1);
+                int shang = ((endpoint - startpoint) + 1) / threadNum;
+                int start = startpoint + shang * i;
+                int end = yu != 0 && i == threadNum - 1 ? endpoint : startpoint + shang * (i + 1) - 1;
                 ////为了能传递多个参数给线程，将两个数据封装为一个int[]传递
                 int[] para = new int[2] { start, end };
                 Thread enumThread = new Thread(new ParameterizedThreadStart(Method));

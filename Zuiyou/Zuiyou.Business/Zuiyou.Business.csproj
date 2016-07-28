@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Better.Infrastructures.Log">
+      <HintPath>..\DLL\Better.Infrastructures.Log.dll</HintPath>
+    </Reference>
     <Reference Include="Better517Na.Http.Helper">
       <HintPath>..\DLL\Better517Na.Http.Helper.dll</HintPath>
     </Reference>
