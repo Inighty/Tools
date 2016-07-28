@@ -80,10 +80,17 @@ namespace Zuiyou.Business
         private static string checkCode = "0001";
 
         /// <summary>
+        /// 锁对象
+        /// </summary>
+        private static Object lk = new object();
+
+        /// <summary>
         /// 实例化数据操作类
         /// </summary>
         private SaveData saveData = new SaveData();
 
+        ConsoleColor colorBack = Console.BackgroundColor;
+        ConsoleColor colorFore = Console.ForegroundColor;
         /// <summary>
         /// 接收数据，执行方法
         /// </summary>
@@ -95,7 +102,7 @@ namespace Zuiyou.Business
 
             ////调用GetPostEnum方法
             RequestZuiyou request = new RequestZuiyou();
-            request.GetPostEnum(p[0], p[1]);
+            request.GetPostEnum(p[0], p[1], p[2]);
         }
 
         /// <summary>
@@ -151,57 +158,90 @@ namespace Zuiyou.Business
         /// </summary>
         /// <param name="start">起点</param>
         /// <param name="end">终点</param>
-        public void GetPostEnum(int start, int end)
+        public void GetPostEnum(int start, int end, int threadId)
         {
             try
             {
+                ////每条线程 控制台打印必须加锁
+                lock (lk)
+                {
+                    Console.SetCursorPosition(0, threadId == 0 ? 0 : threadId * 3);
+                    Console.WriteLine("******线程{0}******", threadId);
+
+                    Console.BackgroundColor = ConsoleColor.DarkCyan;
+
+                    for (int i = 0; i < Console.WindowWidth - 3; i++)
+                    {
+                        Console.Write(" ");
+                    }
+                    Console.WriteLine(" ");
+                    Console.BackgroundColor = colorBack;
+                    Console.WriteLine("0%");
+                }
                 for (int i = start; i <= end; i++)
                 {
-                    List<PosterModel> posterList = new List<PosterModel>();
-                    HttpResult result = null;
-                    HttpRequestParam param = new HttpRequestParam();
-                    param.URL = "http://tbapi.ixiaochuan.cn/post/detail";
-                    param.Method = "POST";
-
-                    ////param.Postdata = "{\"h_ts\":" + ((DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000) + ",\"h_av\":\"2.6.0\",\"h_nt\":1,\"h_m\":0,\"h_did\":\""+GenerateCheckCode()+"_08:60:7E\"}";
-                    param.Postdata = "{\"h_dt\":0,\"h_av\":\"2.6.0\",\"pid\":" + i + ",\"from\":\"index\",\"h_nt\":1}";
-                    param.KeepAlive = true;
-                    param.UserAgent = "tieba/20160715.184411(iPhone;IOS 10.0;Scale/2.00)";
-                    ////proxyInfo = ProxyHelper.GetProxyInfo("Rightest_Grab");
-                    try
-                    {
-                        result = HttpHelper.GetHttpRequestData(param);
-                    }
-                    catch
-                    {
-                    }
-
-                    if (result != null)
-                    {
-                        JObject obj = JObject.Parse(result.Html);
-                        if (obj["ret"].ToString() == "1" && obj["data"] != null)
-                        {
-                            Console.WriteLine(i);
-                            JToken data = obj["data"]["post"];
-                            posterList.Add(this.GetModel(data));
-                        }
-
-                        if (posterList.Count == 0)
-                        {
-                            continue;
-                        }
-
-                        string sql = this.ListToSql(posterList, table);
-                        int count = this.saveData.getmysqlcom(sql);
-                    }
-
-                    Thread.Sleep(TimeSpan.FromSeconds(1));
+                    ////for循环不加锁，每一次循环中加锁
+                    Sub(start, end, threadId, i);
                 }
             }
             catch (Exception ex)
             {
                 Console.Write(ex.ToString());
             }
+        }
+
+        public void Sub(int start, int end, int threadId, int i)
+        {
+            lock (lk)
+            {
+                List<PosterModel> posterList = new List<PosterModel>();
+                HttpResult result = null;
+                HttpRequestParam param = new HttpRequestParam();
+                param.URL = "http://tbapi.ixiaochuan.cn/post/detail";
+                param.Method = "POST";
+
+                ////param.Postdata = "{\"h_ts\":" + ((DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000) + ",\"h_av\":\"2.6.0\",\"h_nt\":1,\"h_m\":0,\"h_did\":\""+GenerateCheckCode()+"_08:60:7E\"}";
+                param.Postdata = "{\"h_dt\":0,\"h_av\":\"2.6.0\",\"pid\":" + i + ",\"from\":\"index\",\"h_nt\":1}";
+                param.KeepAlive = true;
+                param.UserAgent = "tieba/20160715.184411(iPhone;IOS 10.0;Scale/2.00)";
+                ////proxyInfo = ProxyHelper.GetProxyInfo("Rightest_Grab");
+                try
+                {
+                    result = HttpHelper.GetHttpRequestData(param);
+                }
+                catch
+                {
+                }
+
+                Console.BackgroundColor = ConsoleColor.Yellow;
+
+                Console.SetCursorPosition(Convert.ToInt32(((i - start) * 1.0 / (end - start)) * 100) * (Console.WindowWidth - 2) / 100, threadId * 3 + 1);
+
+                Console.Write(" ");
+                Console.BackgroundColor = colorBack;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.SetCursorPosition(0, threadId * 3 + 2);
+                Console.Write("{0}%,id:{1}", Convert.ToDouble((i - start) * 1.0 / (end - start) * 100).ToString("0.00"), i);
+                Console.ForegroundColor = colorFore;
+
+                if (result != null)
+                {
+                    JObject obj = JObject.Parse(result.Html);
+                    if (obj["ret"].ToString() == "1" && obj["data"] != null)
+                    {
+                        //Console.WriteLine(i);
+                        JToken data = obj["data"]["post"];
+                        posterList.Add(this.GetModel(data));
+                    }
+
+                    if (posterList.Count != 0)
+                    {
+                        string sql = this.ListToSql(posterList, table);
+                        int count = this.saveData.getmysqlcom(sql);
+                    }
+                }
+            }
+            Thread.Sleep(TimeSpan.FromSeconds(1));
         }
 
         /// <summary>
@@ -358,7 +398,7 @@ namespace Zuiyou.Business
                 int start = startpoint + shang * i;
                 int end = yu != 0 && i == threadNum - 1 ? endpoint : startpoint + shang * (i + 1) - 1;
                 ////为了能传递多个参数给线程，将两个数据封装为一个int[]传递
-                int[] para = new int[2] { start, end };
+                int[] para = new int[3] { start, end, i };
                 Thread enumThread = new Thread(new ParameterizedThreadStart(Method));
                 enumThread.Start(para);
             }
