@@ -82,15 +82,23 @@ namespace Zuiyou.Business
         /// <summary>
         /// 锁对象
         /// </summary>
-        private static Object lk = new object();
+        private static object lk = new object();
 
         /// <summary>
         /// 实例化数据操作类
         /// </summary>
         private SaveData saveData = new SaveData();
 
-        ConsoleColor colorBack = Console.BackgroundColor;
-        ConsoleColor colorFore = Console.ForegroundColor;
+        /// <summary>
+        /// 背景色
+        /// </summary>
+        private ConsoleColor colorBack = Console.BackgroundColor;
+
+        /// <summary>
+        /// 前景色
+        /// </summary>
+        private ConsoleColor colorFore = Console.ForegroundColor;
+
         /// <summary>
         /// 接收数据，执行方法
         /// </summary>
@@ -158,6 +166,7 @@ namespace Zuiyou.Business
         /// </summary>
         /// <param name="start">起点</param>
         /// <param name="end">终点</param>
+        /// <param name="threadId">线程ID</param>
         public void GetPostEnum(int start, int end, int threadId)
         {
             try
@@ -174,14 +183,16 @@ namespace Zuiyou.Business
                     {
                         Console.Write(" ");
                     }
+
                     Console.WriteLine(" ");
-                    Console.BackgroundColor = colorBack;
+                    Console.BackgroundColor = this.colorBack;
                     Console.WriteLine("0%");
                 }
+
                 for (int i = start; i <= end; i++)
                 {
                     ////for循环不加锁，每一次循环中加锁
-                    Sub(start, end, threadId, i);
+                    this.Sub(start, end, threadId, i);
                 }
             }
             catch (Exception ex)
@@ -190,6 +201,13 @@ namespace Zuiyou.Business
             }
         }
 
+        /// <summary>
+        /// 子方法
+        /// </summary>
+        /// <param name="start">起始ID</param>
+        /// <param name="end">终结ID</param>
+        /// <param name="threadId">线程ID</param>
+        /// <param name="i">当前ID</param>
         public void Sub(int start, int end, int threadId, int i)
         {
             lock (lk)
@@ -215,21 +233,21 @@ namespace Zuiyou.Business
 
                 Console.BackgroundColor = ConsoleColor.Yellow;
 
-                Console.SetCursorPosition(Convert.ToInt32(((i - start) * 1.0 / (end - start)) * 100) * (Console.WindowWidth - 2) / 100, threadId * 3 + 1);
+                Console.SetCursorPosition(Convert.ToInt32(((i - start) * 1.0 / (end - start)) * 100) * ((Console.WindowWidth - 2) / 100), (threadId * 3) + 1);
 
                 Console.Write(" ");
-                Console.BackgroundColor = colorBack;
+                Console.BackgroundColor = this.colorBack;
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.SetCursorPosition(0, threadId * 3 + 2);
+                Console.SetCursorPosition(0, (threadId * 3) + 2);
                 Console.Write("{0}%,id:{1}", Convert.ToDouble((i - start) * 1.0 / (end - start) * 100).ToString("0.00"), i);
-                Console.ForegroundColor = colorFore;
+                Console.ForegroundColor = this.colorFore;
 
                 if (result != null)
                 {
                     JObject obj = JObject.Parse(result.Html);
                     if (obj["ret"].ToString() == "1" && obj["data"] != null)
                     {
-                        //Console.WriteLine(i);
+                        ////Console.WriteLine(i);
                         JToken data = obj["data"]["post"];
                         posterList.Add(this.GetModel(data));
                     }
@@ -241,6 +259,7 @@ namespace Zuiyou.Business
                     }
                 }
             }
+
             Thread.Sleep(TimeSpan.FromSeconds(1));
         }
 
@@ -395,8 +414,8 @@ namespace Zuiyou.Business
             {
                 int yu = (endpoint - startpoint) % threadNum;
                 int shang = ((endpoint - startpoint) + 1) / threadNum;
-                int start = startpoint + shang * i;
-                int end = yu != 0 && i == threadNum - 1 ? endpoint : startpoint + shang * (i + 1) - 1;
+                int start = startpoint + (shang * i);
+                int end = yu != 0 && i == threadNum - 1 ? endpoint : startpoint + (shang * (i + 1)) - 1;
                 ////为了能传递多个参数给线程，将两个数据封装为一个int[]传递
                 int[] para = new int[3] { start, end, i };
                 Thread enumThread = new Thread(new ParameterizedThreadStart(Method));
