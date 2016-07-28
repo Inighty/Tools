@@ -310,7 +310,8 @@ namespace Zuiyou.Business
                             model = this.GetModel(item);
                             posterList.Add(model);
                         }
-
+                        Console.BackgroundColor = colorBack;
+                        Console.SetCursorPosition(0, 3 * ConfigReader.ThreadNum);
                         Console.WriteLine(DateTime.Now + " 获取到" + datalist.Count + "条数据");
                     }
                 }
