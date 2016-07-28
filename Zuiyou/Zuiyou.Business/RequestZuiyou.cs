@@ -243,7 +243,7 @@ namespace Zuiyou.Business
                         }
                     }
 
-                    Thread.Sleep(TimeSpan.FromSeconds(1));
+                    Thread.Sleep(TimeSpan.FromMilliseconds(200));
                 }
             }
             catch (Exception ex)
@@ -409,7 +409,7 @@ namespace Zuiyou.Business
                 int shang = ((endpoint - startpoint) + 1) / threadNum;
                 int start = startpoint + (shang * i);
                 int end = yu != 0 && i == threadNum - 1 ? endpoint : startpoint + (shang * (i + 1)) - 1;
-                ////为了能传递多个参数给线程，将两个数据封装为一个int[]传递
+                ////为了能传递多个参数给线程，将数据封装为一个int[]传递
                 int[] para = new int[3] { start, end, i };
                 Thread enumThread = new Thread(new ParameterizedThreadStart(Method));
                 enumThread.Start(para);
