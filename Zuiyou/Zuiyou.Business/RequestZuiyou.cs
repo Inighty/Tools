@@ -192,27 +192,28 @@ namespace Zuiyou.Business
                 for (int i = start; i <= end; i++)
                 {
                     ////for循环外不加锁，每一次循环中加锁
+
+                    List<PosterModel> posterList = new List<PosterModel>();
+                    HttpResult result = null;
+                    HttpRequestParam param = new HttpRequestParam();
+                    param.URL = "http://tbapi.ixiaochuan.cn/post/detail";
+                    param.Method = "POST";
+
+                    ////param.Postdata = "{\"h_ts\":" + ((DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000) + ",\"h_av\":\"2.6.0\",\"h_nt\":1,\"h_m\":0,\"h_did\":\""+GenerateCheckCode()+"_08:60:7E\"}";
+                    param.Postdata = "{\"h_dt\":0,\"h_av\":\"2.6.0\",\"pid\":" + i + ",\"from\":\"index\",\"h_nt\":1}";
+                    param.KeepAlive = true;
+                    param.UserAgent = "tieba/20160715.184411(iPhone;IOS 10.0;Scale/2.00)";
+                    ////proxyInfo = ProxyHelper.GetProxyInfo("Rightest_Grab");
+                    try
+                    {
+                        result = HttpHelper.GetHttpRequestData(param);
+                    }
+                    catch
+                    {
+                    }
+
                     lock (lk)
                     {
-                        List<PosterModel> posterList = new List<PosterModel>();
-                        HttpResult result = null;
-                        HttpRequestParam param = new HttpRequestParam();
-                        param.URL = "http://tbapi.ixiaochuan.cn/post/detail";
-                        param.Method = "POST";
-
-                        ////param.Postdata = "{\"h_ts\":" + ((DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000) + ",\"h_av\":\"2.6.0\",\"h_nt\":1,\"h_m\":0,\"h_did\":\""+GenerateCheckCode()+"_08:60:7E\"}";
-                        param.Postdata = "{\"h_dt\":0,\"h_av\":\"2.6.0\",\"pid\":" + i + ",\"from\":\"index\",\"h_nt\":1}";
-                        param.KeepAlive = true;
-                        param.UserAgent = "tieba/20160715.184411(iPhone;IOS 10.0;Scale/2.00)";
-                        ////proxyInfo = ProxyHelper.GetProxyInfo("Rightest_Grab");
-                        try
-                        {
-                            result = HttpHelper.GetHttpRequestData(param);
-                        }
-                        catch
-                        {
-                        }
-
                         Console.BackgroundColor = ConsoleColor.Yellow;
 
                         ////计算到达进度设置光标位置
@@ -299,7 +300,7 @@ namespace Zuiyou.Business
                             model = this.GetModel(item);
                             posterList.Add(model);
                         }
-                        lock(lk)
+                        lock (lk)
                         {
                             Console.BackgroundColor = colorBack;
                             Console.SetCursorPosition(0, 3 * ConfigReader.ThreadNum);
