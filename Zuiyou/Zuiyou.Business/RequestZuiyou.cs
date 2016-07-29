@@ -217,7 +217,7 @@ namespace Zuiyou.Business
                         Console.BackgroundColor = ConsoleColor.Yellow;
 
                         ////计算到达进度设置光标位置
-                        Console.SetCursorPosition(Convert.ToInt32(((i - start) * 1.0 / (end - start)) * 100) * ((Console.WindowWidth - 2) / 100), (threadId * 3) + 1);
+                        Console.SetCursorPosition((Convert.ToInt32((i - start) * 1.0 * 100 / (end - start)) * (Console.WindowWidth - 2) / 100), (threadId * 3) + 1);
 
                         Console.Write(" ");
                         Console.BackgroundColor = this.colorBack;
