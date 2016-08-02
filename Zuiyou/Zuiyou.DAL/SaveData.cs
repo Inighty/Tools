@@ -1,39 +1,75 @@
-﻿using MySql.Data.MySqlClient;
+﻿//-----------------------------------------------------------------------
+// <copyright file="SaveData.cs" company="517Na Enterprises">
+// * Copyright (C) 2016 517Na科技有限公司 版权所有。
+// * version : 4.0.30319.42000
+// * author  : tianxun
+// * FileName: SaveData.cs
+// * history : created by tianxun 2016-8-2 9:40:08 
+// </copyright>
+//-----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+using Zuiyou.Model;
 
 namespace Zuiyou.DAL
 {
+    /// <summary>
+    /// 存储数据类
+    /// </summary>
     public class SaveData
     {
-        public int getmysqlcom(string M_str_sqlstr)
-        {
-            MySqlConnection mysqlcon = new MySqlConnection();
-            string M_str_sqlcon = "server=localhost;user id=root;password=mc0321..;database=test"; //根据自己的设置
-            using (mysqlcon = new MySqlConnection(M_str_sqlcon))
-            {
-                int count = 0;
-                if (mysqlcon.State == System.Data.ConnectionState.Closed)
-                {
-                    mysqlcon.Open();
-                }
-                MySqlCommand mysqlcom = new MySqlCommand(M_str_sqlstr, mysqlcon);
-                try
-                {
-                    count = mysqlcom.ExecuteNonQuery();
-                }
-                catch (Exception e)
-                {
+        /// <summary>
+        /// 表名
+        /// </summary>
+        private static string table = "zuiyoulist";
 
+        /// <summary>
+        /// 数据库
+        /// </summary>
+        private static string conn = "server=localhost;user id=root;password=mc0321..;database=test"; 
+
+        /// <summary>
+        /// List转为sql语句
+        /// </summary>
+        /// <param name="list">数据列表</param>
+        /// <returns>sql语句</returns>
+        public int ListToSave(List<PosterModel> list)
+        {
+            StringBuilder sqlStr = new StringBuilder();
+            foreach (var item in list)
+            {
+                string names = string.Empty;
+                string values = string.Empty;
+                string updateStr = string.Empty;
+                Type t = item.GetType();
+                foreach (PropertyInfo pi in t.GetProperties())
+                {
+                    string name = pi.Name;
+                    names += name + ",";
+                    ////用pi.GetValue获得值
+                    object value1 = pi.GetValue(item, null);
+                    if (value1.ToString().Contains("'"))
+                    {
+                        value1 = value1.ToString().Replace("'", "''");
+                    }
+
+                    values += "'" + value1.ToString() + "'" + ",";
+                    updateStr += name + "=" + "'" + value1 + "',";
                 }
-                mysqlcom.Dispose();
-                mysqlcon.Close();
-                mysqlcon.Dispose();
-                return count;
+
+                values = values.Substring(0, values.Length - 1);
+                names = names.Substring(0, names.Length - 1);
+                updateStr = updateStr.Substring(0, updateStr.Length - 1);
+                sqlStr.AppendFormat("insert into {0}({1}) values ({2}) ON DUPLICATE KEY UPDATE {3};\n", table, names, values, updateStr);
             }
+
+            SqlHelper sqlHelper = new SqlHelper(new MySqlConnection(conn));
+            return sqlHelper.Insert(sqlStr.ToString());
         }
     }
 }

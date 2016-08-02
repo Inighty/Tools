@@ -63,7 +63,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RequestZuiyou.cs" />
+    <Compile Include="EnumThread.cs" />
+    <Compile Include="RefreshThread.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
