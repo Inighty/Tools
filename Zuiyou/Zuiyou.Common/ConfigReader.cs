@@ -1,4 +1,13 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="ConfigReader.cs" company="517Na Enterprises">
+// * Copyright (C) 2016 517Na科技有限公司 版权所有。
+// * version : 4.0.30319.42000
+// * author  : tianxun
+// * FileName: ConfigReader.cs
+// * history : created by tianxun 2016-8-2 13:45:15 
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
