@@ -9,10 +9,9 @@ namespace Zuiyou.DAL
 {
     public class SaveData
     {
-        private static MySqlConnection mysqlcon = null;
-
         public int getmysqlcom(string M_str_sqlstr)
         {
+            MySqlConnection mysqlcon = new MySqlConnection();
             string M_str_sqlcon = "server=localhost;user id=root;password=mc0321..;database=test"; //根据自己的设置
             using (mysqlcon = new MySqlConnection(M_str_sqlcon))
             {
