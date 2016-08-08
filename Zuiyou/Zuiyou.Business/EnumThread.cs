@@ -86,6 +86,7 @@ namespace Zuiyou.Business
         {
             try
             {
+                List<PosterModel> posterList = new List<PosterModel>();
                 SaveData saveData = new SaveData();
                 ////每条线程 控制台打印必须加锁，以防光标位置混乱
                 lock (lk)
@@ -118,30 +119,13 @@ namespace Zuiyou.Business
                         Console.Write(" ");
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.SetCursorPosition(0, (threadId * 3) + 2);
+                        Console.SetCursorPosition(0, 3 * threadId + 2);
                         Console.Write("{0}%,id:{1}", Convert.ToDouble((i - start) * 1.0 / (end - start) * 100).ToString("0.00"), i);
                         Console.ForegroundColor = ConsoleColor.Gray;
                     }
 
-                    List<PosterModel> posterList = new List<PosterModel>();
-                    HttpResult result = null;
-                    HttpRequestParam param = new HttpRequestParam();
-                    param.URL = "http://tbapi.ixiaochuan.cn/post/detail";
-                    param.Method = "POST";
-
-                    ////param.Postdata = "{\"h_ts\":" + ((DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000) + ",\"h_av\":\"2.6.0\",\"h_nt\":1,\"h_m\":0,\"h_did\":\""+GenerateCheckCode()+"_08:60:7E\"}";
-                    param.Postdata = "{\"h_dt\":0,\"h_av\":\"2.6.0\",\"pid\":" + i + ",\"from\":\"index\",\"h_nt\":1}";
-                    param.KeepAlive = true;
-                    param.UserAgent = "tieba/20160715.184411(iPhone;IOS 10.0;Scale/2.00)";
-                    ////proxyInfo = ProxyHelper.GetProxyInfo("Rightest_Grab");
-                    try
-                    {
-                        result = HttpHelper.GetHttpRequestData(param);
-                    }
-                    catch
-                    {
-                    }
-
+                    Business.RequestMethod requestMethod = new RequestMethod();
+                    HttpResult result = requestMethod.RequstMethod(i);
                     if (result != null)
                     {
                         JObject obj = JObject.Parse(result.Html);
@@ -149,18 +133,16 @@ namespace Zuiyou.Business
                         {
                             ////Console.WriteLine(i);
                             JToken data = obj["data"]["post"];
-                            ChangeToModel changeToModel = new ChangeToModel();
+                            Tools changeToModel = new Tools();
                             posterList.Add(changeToModel.GetModel(data));
                         }
-
-                        if (posterList.Count != 0)
-                        {
-                            int count = saveData.ListToSave(posterList);
-                        }
                     }
-                    
-                    Thread.Sleep(TimeSpan.FromMilliseconds(200));
+                    if (posterList.Count != 0)
+                    {
+                        int count = saveData.ListToSave(posterList);
+                    }
                 }
+                Thread.Sleep(TimeSpan.FromMilliseconds(200));
             }
             catch (Exception ex)
             {

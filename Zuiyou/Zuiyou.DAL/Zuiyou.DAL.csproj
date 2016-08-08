@@ -65,6 +65,10 @@
     <Compile Include="SqlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Zuiyou.Common\Zuiyou.Common.csproj">
+      <Project>{5bca406f-ea2e-4b4a-9607-93412114ca69}</Project>
+      <Name>Zuiyou.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zuiyou.Model\Zuiyou.Model.csproj">
       <Project>{48ef4a4a-e2f0-4c90-839b-a2faed0d36fe}</Project>
       <Name>Zuiyou.Model</Name>

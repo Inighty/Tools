@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using Zuiyou.Common;
 using Zuiyou.Model;
 
 namespace Zuiyou.DAL
@@ -23,16 +24,6 @@ namespace Zuiyou.DAL
     /// </summary>
     public class SaveData
     {
-        /// <summary>
-        /// 表名
-        /// </summary>
-        private static string table = "zuiyoulist";
-
-        /// <summary>
-        /// 数据库
-        /// </summary>
-        private static string conn = "server=localhost;user id=root;password=mc0321..;database=test"; 
-
         /// <summary>
         /// List转为sql语句
         /// </summary>
@@ -57,19 +48,21 @@ namespace Zuiyou.DAL
                     {
                         value1 = value1.ToString().Replace("'", "''");
                     }
-
                     values += "'" + value1.ToString() + "'" + ",";
                     updateStr += name + "=" + "'" + value1 + "',";
                 }
-
+                //if (string.IsNullOrEmpty(values) || string.IsNullOrEmpty(names))
+                //{
+                //    continue;
+                //}
                 values = values.Substring(0, values.Length - 1);
                 names = names.Substring(0, names.Length - 1);
                 updateStr = updateStr.Substring(0, updateStr.Length - 1);
-                sqlStr.AppendFormat("insert into {0}({1}) values ({2}) ON DUPLICATE KEY UPDATE {3};\n", table, names, values, updateStr);
+                sqlStr.AppendFormat("insert into {0}({1}) values ({2}) ON DUPLICATE KEY UPDATE {3};\n", ConfigReader.TableName, names, values, updateStr);
             }
 
-            SqlHelper sqlHelper = new SqlHelper(new MySqlConnection(conn));
-            return sqlHelper.Insert(sqlStr.ToString());
+            SqlHelper sqlHelper = new SqlHelper(sqlStr.ToString());
+            return sqlHelper.Insert();
         }
     }
 }

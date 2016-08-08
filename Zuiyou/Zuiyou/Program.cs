@@ -46,6 +46,8 @@ namespace Zuiyou
             
             Thread enumThread = new Thread(new EnumThread().FenPeiTask);
 
+            Thread TimerObtainThread = new Thread(new TimerObtainThread().TimerObtain); 
+
             string taskNo = ConfigReader.StartThread;
             string[] arr = taskNo.Split(',');
 
@@ -61,6 +63,9 @@ namespace Zuiyou
                         break;
                     case "3":
                         enumThread.Start();
+                        break;
+                    case "4":
+                        TimerObtainThread.Start();
                         break;
                     default:
                         break;

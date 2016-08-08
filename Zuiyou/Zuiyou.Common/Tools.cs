@@ -19,7 +19,7 @@ namespace Zuiyou.Common
     /// <summary>
     /// ChangeToModel类 
     /// </summary>
-    public class ChangeToModel
+    public class Tools
     {
         /// <summary>
         /// 根据返回数据解析为model

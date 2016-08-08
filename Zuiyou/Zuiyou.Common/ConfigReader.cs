@@ -59,6 +59,14 @@ namespace Zuiyou.Common
         }
 
         /// <summary>
+        /// 表名
+        /// </summary>
+        public static string TableName
+        {
+            get { return GetConfigValue("TableName", "zuiyoulist"); }
+        }
+
+        /// <summary>
         /// 获取配置文件参数
         /// </summary>
         /// <typeparam name="T">参数值类型</typeparam>

@@ -22,45 +22,101 @@ namespace Zuiyou.DAL
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private MySqlConnection conn = null;
+        private static MySqlConnection conn = null;
+
+        /// <summary>
+        /// 数据库
+        /// </summary>
+        private static string connStr = "server=localhost;user id=root;password=mc0321..;database=test"; 
+
+        /// <summary>
+        /// sql语句
+        /// </summary>
+        private string sqlStr = string.Empty;
+
+        /// <summary>
+        /// sql命令
+        /// </summary>
+        private MySqlCommand connCmd = null;
+
+        private object obj = new object();
 
         /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="conn">数据库连接</param>
-        public SqlHelper(MySqlConnection conn)
+        /// <param name="sqlStr">sql语句</param>
+        public SqlHelper(string sqlStr)
         {
-            this.conn = conn;
+            try
+            {
+                this.sqlStr = sqlStr;
+            }
+            catch (Exception e) {
+                Console.Write(sqlStr);
+            }
         }
 
         /// <summary>
         /// 插入数据
         /// </summary>
-        /// <param name="sqlStr">sql语句</param>
         /// <returns>影响行数</returns>
-        public int Insert(string sqlStr)
+        public int Insert()
         {
-            using (this.conn)
+            lock (obj)
             {
-                int count = 0;
-                if (this.conn.State == System.Data.ConnectionState.Closed)
+                using (conn =new MySqlConnection(connStr))
                 {
-                    this.conn.Open();
+                    int count = 0;
+                    if (conn.State == System.Data.ConnectionState.Closed)
+                    {
+                        conn.Open();
+                    }
+
+                    this.connCmd = new MySqlCommand(this.sqlStr, conn);
+                    try
+                    {
+                        count = this.connCmd.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+                    }
+                    return count;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取最新数据
+        /// </summary>
+        /// <returns>id</returns>
+        public int GetNewestData()
+        {
+            lock (obj)
+            {
+                int id = 0;
+                using (conn = new MySqlConnection(connStr))
+                {
+                    
+                    try
+                    {
+                        if (conn.State == System.Data.ConnectionState.Closed)
+                        {
+                            conn.Open();
+                        }
+
+                        this.connCmd = new MySqlCommand(this.sqlStr, conn);
+                        MySqlDataReader reader = this.connCmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            id = Convert.ToInt32(reader[0]);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                    }
                 }
 
-                MySqlCommand connCmd = new MySqlCommand(sqlStr, this.conn);
-                try
-                {
-                    count = connCmd.ExecuteNonQuery();
-                }
-                catch (Exception e)
-                {
-                }
-
-                connCmd.Dispose();
-                this.conn.Close();
-                this.conn.Dispose();
-                return count;
+                return id;
             }
         }
     }

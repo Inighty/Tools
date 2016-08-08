@@ -6,7 +6,7 @@
 // * FileName: RefreshThread.cs
 // * history : created by tianxun 2016-8-2 9:40:08 
 // </copyright>
-//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------找你去
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -147,14 +147,14 @@ namespace Zuiyou.Business
                         foreach (JToken item in datalist)
                         {
                             PosterModel model = new PosterModel();
-                            model = new Common.ChangeToModel().GetModel(item);
+                            model = new Common.Tools().GetModel(item);
                             posterList.Add(model);
                         }
                         ////lock (lk)
                         ////{
-                            Console.BackgroundColor = Console.BackgroundColor;
-                            Console.SetCursorPosition(0, 3 * ConfigReader.ThreadNum);
-                            Console.WriteLine(DateTime.Now + " 获取到" + datalist.Count + "条数据");
+                        Console.BackgroundColor = Console.BackgroundColor;
+                        Console.SetCursorPosition(0, 3 * ConfigReader.ThreadNum);
+                        Console.WriteLine(DateTime.Now + " 持续刷新线程获取到" + datalist.Count + "条数据");
                         ////}
                     }
                 }

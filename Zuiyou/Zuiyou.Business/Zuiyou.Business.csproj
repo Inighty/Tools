@@ -66,6 +66,8 @@
     <Compile Include="EnumThread.cs" />
     <Compile Include="RefreshThread.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestMethod.cs" />
+    <Compile Include="TimerObtainThread.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\zuiyou.Common\Zuiyou.Common.csproj">
